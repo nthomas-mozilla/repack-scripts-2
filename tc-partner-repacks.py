@@ -536,7 +536,7 @@ if __name__ == '__main__':
         help="Specify the directory where the partner config files are found"
     )
     parser.add_option(
-        "-p", "--partner", dest="partner",
+        "-p", "--partner", dest="partner", action="append",
         help="Repack for a single partner, specified by name"
     )
     parser.add_option(
@@ -642,8 +642,7 @@ if __name__ == '__main__':
         partner = root[len(options.partners_dir) + 1:].split("/")[0]
         partner_distro = os.path.split(root)[-1]
         if options.partner:
-            if options.partner != partner and \
-                    options.partner != partner_distro[:len(options.partner)]:
+            if partner not in options.partner and partner_distro not in options.partner:
                 continue
 
         for f in files:
